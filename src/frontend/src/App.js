@@ -9,7 +9,7 @@ import {
     Spin,
     Empty,
 } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import {LoadingOutlined} from '@ant-design/icons';
 
 import './App.css';
 
@@ -26,18 +26,14 @@ const columns = [
         key: 'name',
     },
     {
-        title: 'Lastname',
-        dataIndex: 'lastname',
-        key: 'lastname',
-    },
-    {
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
     },
 ];
 
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+const antIcon = <LoadingOutlined style={{fontSize: 24}} spin/>;
+
 function App() {
     const {
         token: {colorBgContainer},
@@ -50,28 +46,28 @@ function App() {
             .then(data => {
                 console.log(data);
                 setUsers(data);
-                setFetching(false);
-            });
+                setFetching(data);
+            })
 
     useEffect(() => {
         console.log("component is mounted");
-        fetchUsers();
+        void fetchUsers();
     }, []);
 
     const renderUsers = () => {
         if (fetching) {
-            return <Spin indicator={antIcon} />
+            return <Spin indicator={antIcon}/>
         }
         if (users.length <= 0) {
-            return <Empty />;
+            return <Empty/>;
         }
         return <Table
             dataSource={users}
             columns={columns}
             bordered
             title={() => 'Users'}
-            pagination={{ pageSize: 50 }}
-            scroll={{ y: 240 }}
+            pagination={{pageSize: 10}}
+            scroll={{y: 240}}
             rowKey={(userData) => userData.id}
         />;
     }
@@ -79,15 +75,7 @@ function App() {
     return (
         <Layout>
             <Header
-                style={{
-                    position: 'sticky',
-                    top: 0,
-                    zIndex: 1,
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                }}
-            >
+                style={{position: 'sticky', top: 0, zIndex: 1, width: '100%', display: 'flex', alignItems: 'center',}}>
                 <div className="demo-logo"/>
                 <Menu
                     theme="dark"
@@ -99,37 +87,16 @@ function App() {
                     }))}
                 />
             </Header>
-            <Content
-                className="site-layout"
-                style={{
-                    padding: '0 50px',
-                }}
-            >
-                <Breadcrumb
-                    style={{
-                        margin: '16px 0',
-                    }}
-                >
+            <Content className="site-layout" style={{padding: '0 50px'}}>
+                <Breadcrumb style={{margin: '16px 0'}}>
                     <Breadcrumb.Item>Users</Breadcrumb.Item>
                     <Breadcrumb.Item>List</Breadcrumb.Item>
                 </Breadcrumb>
-                <div
-                    style={{
-                        padding: 24,
-                        minHeight: 380,
-                        background: colorBgContainer,
-                    }}
-                >
+                <div style={{padding: 24, minHeight: 380, background: colorBgContainer,}}>
                     {renderUsers()}
                 </div>
             </Content>
-            <Footer
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-                Santiago Lanao ©2023
-            </Footer>
+            <Footer style={{textAlign: 'center'}}>Santiago Lanao ©2023</Footer>
         </Layout>
     );
 }

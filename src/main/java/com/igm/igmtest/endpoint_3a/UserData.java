@@ -1,4 +1,4 @@
-package com.igm.igmtest.userdata;
+package com.igm.igmtest.endpoint_3a;
 
 import lombok.*;
 
@@ -10,8 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 
 public class UserData {
-    private Long id;
+    private Integer id;
     private String name;
-    private String lastname;
     private String email;
 }
